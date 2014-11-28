@@ -125,3 +125,29 @@ console.log(_.pick(obj,"name","artist"));
 console.log(_.pick(obj,"name"));
 
 
+//FUNCTION 
+//bind : binds a function to an object
+var intro = function () { return "Welcome to " + this.name};
+intro = _.bind(intro,obj);
+console.log(intro());
+
+obj.intg = function () { return "I love " + this.artist };
+y=obj.intg;
+//I love undefined : as this is not defined for y object
+console.log(y());
+//I love Pink Floyd : as this is not defined for y object
+console.log(obj.intg());
+
+//CHAINING
+var upperArtist = _.chain(albums).pluck('artist').invoke('toUpperCase').value();
+console.log(upperArtist);
+
+//or
+
+upperArtist = _.pluck(albums,'artist').map(function(e){ return e.toUpperCase()});
+
+console.log(upperArtist);
+
+//Template
+var temp = _.template("You will love <%= artist %>'s <%= name %>");
+console.log(temp(albums[0]));
